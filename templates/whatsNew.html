@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+     <!-- main content -->
+     <div id="Content">
+        <div class="content_wrapper clearfix" style="display: flex; justify-content: space-around; gap: 4rem;">
+    
+            <!-- .sections_group -->
+            <div class="sections_group">
+    
+                <div class="entry-content" itemprop="mainContentOfPage">
+    
+                    <div class="section the_content has_content">
+                        <div class="section_wrapper">
+                            <div class="the_content_wrapper">
+                                <div class="sub-content">
+                                    <div id="wrap" class="clearfix">
+                                        <section id="content" class="primary" role="main">
+                                            {% for news_item in news_items %}
+                                                <article class="article">
+                                                    <h3 style="color: #9e2a2b; font-weight: 700;">{{news_item.title}}</h3>
+                                                    <p>{{news_item.description}}</p> 
+                                                </article>
+                                                <hr>
+                                            {% endfor %}
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="custom" style="margin-top: 2rem;">
+            <p>
+                <a class="wf_file" target="_blank" href="/static/files/Sri_Lanka_at_a_glance.pdf">
+                    <img src="/static/images/sl_glance_new2.png" alt="sl glance new2" width="220" height="220" />
+                </a>
+            </p>
+            <p>
+                <a class="wf_file" target="_blank" href="/static/files/hello-again-text-f2.pdf">
+                    <img src="/static/images/helloagainposter.jpg" alt="helloagainposter" width="220" height="40" />
+                </a>
+            </p>
+            <p>
+                <a target="_blank" href="https://www.contactsrilanka.mfa.gov.lk/">
+                    <img src="/static/images/button_Contact_srilanka.jpg" alt="button Contact srilanka" width="220"
+                        height="40" />
+                </a>
+            </p>
+            <p>
+                <a target="_blank" href="/static/files/Information_Related_to_COVID-19_-_update29.pdf">
+                    <img src="/static/images/Covid-Banner-19.jpg" alt="Covid Banner 19" width="220" height="40" />
+                </a>
+            </p>
+            <p>
+                <a target="_blank" href="https://slembassyusa.org/tracking/">
+                    <img src="/static/images/passport-status.png" alt="" width="220" height="40" />
+                </a>
+            </p>
+            <p>
+                <a target="_blank" href="https://www.pmdnews.lk/">
+                    <img src="/static/images/presidential_secretariat_new.jpg" alt="presidential secretariat new"
+                        width="222" height="43" />
+                </a>
+            </p>
+            <p>
+                <a target="_blank" href="https://www.pmoffice.gov.lk/">
+                    <img src="/static/images/prime_ministerst_new.jpg" alt="prime ministerst new" width="220"
+                        height="40" />
+                </a>
+            </p>
+            <p>
+                <a target="_blank" href="https://mfa.gov.lk/">
+                    <img src="/static/images/MFA_tab_n.jpg" alt="MFA tab n" width="220" height="40" />
+                </a>
+            </p>
+            <p>
+                <a target="_blank" href="https://www.gov.lk/index.php">
+                    <img src="/static/images/govwedlogo.jpg" alt="govwedlogo" width="220" height="40" />
+                </a>
+            </p>
+            <p>
+                <a class="wf_file" target="_blank" href="/static/files/SLNY-2021_Banner_Banner-V1.pdf">
+                    <img src="/static/images/aurudu_logo_new_black.png" alt="aurudu logo new black" />
+                </a>
+            </p>
+        </div>
+    </div>
+    </div>
+{% endblock %}

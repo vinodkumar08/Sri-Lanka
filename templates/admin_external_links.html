@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="sub-content">
+    <div class="sub-container">
+        <div class="left-container">
+            <ul class="left-sidebar">
+                <li><a href="{{url_for('admin_news')}}">News</a></li>
+                <li><a href="{{url_for('admin_images')}}">External Links</a></li>
+                <li><a href="{{url_for('admin_clients')}}">Clients</a></li>
+            </ul>
+        </div>
+        <div class="right-container">
+            <div class="external-links-form">
+                <h2 class="heading-2" style="padding: 0 1rem;" >Add External Links</h2>
+
+                <form action="/admin_images" method="POST" enctype="multipart/form-data">
+                    <div class="form-group" style="margin: 1rem;">
+                        <label>Select Image</label>
+                        <input name="file" type="file" />
+                    </div>
+
+                    <div class="form-group" style="margin: 1rem;">
+                        <label for="">Link</label>
+                        <input type="text" placeholder="Enter Link" name="link" id="" />
+                    </div>
+                    <div class="form-group" style="margin: 1rem;">
+                        <input type="submit" value="Submit" />
+                    </div>
+                </form>
+            </div>
+
+            <div class="clients-table">
+                <h2 class="heading-2" style="padding: 0 1rem">Viewing External Links</h2>
+                <table id="myTable" class="external">
+                    <thead class="external">
+                        <tr>
+                            <th scope="col" >Image</th>
+                            <th scope="col" >Link</th>
+                        </tr>
+                    </thead>
+                    <tbody class="external">
+                        {% for image in images %}
+                        <tr>
+                            <td >{{image.image}}</td>
+                            <td class="table-row ">{{image.link}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
