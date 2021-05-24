@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 from functools import wraps
 import os
 import cloudinary.uploader
+import functools
 
 cloudinary.config(cloud_name='drezt4si4', api_key="264118375198766", api_secret="ENJyiF-pECeilBaLYwhQY1SE06A")
 
@@ -30,25 +31,24 @@ def create_tables():
     db.create_all()
 
 # create a login required wrapper for user
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'email' in session:
-            return f(*args,**kwargs)
-        else:
-            flash('Unauthorized! Please log in', 'danger')
-            return redirect(url_for('login',next=request.url))
-    return wrap
-
-# def user_login_required(f):
+# def login_required(f):
 #     @wraps(f)
-#     def decorated_function(*args, **kwargs):
-#         # if g is None:
-#         if 'logged_in' not in session:
-#             flash('Unauthorized. Please login!!', "danger")
-#             return redirect(url_for('login', next=request.url))
-#         return f(*args, **kwargs)
-#     return decorated_function
+#     def wrap(*args, **kwargs):
+#         if 'email' in session:
+#             return f(*args,**kwargs)
+#         else:
+#             flash('Unauthorized! Please log in', 'danger')
+#             return redirect(url_for('login',next=request.url))
+#     return wrap
+
+def login_required(func):
+    @functools.wraps(func)
+    def secure_function(*args, **kwargs):
+        if "email" not in session:
+            return redirect(url_for("login", next=request.url))
+        return func(*args, **kwargs)
+
+    return secure_function
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
