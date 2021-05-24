@@ -2363,7 +2363,7 @@
 								<div class="top-bar">
 									<div class="time-content">
 										<img style="border-radius: 999%;" src="/static/images/download (1).png" alt="Kenya" height="20" width="20">
-										Date:&nbsp; <span id="demo"></span>
+										Date:&nbsp; <span id="demo"></span> <span id="time"></span>
 									</div>
 									<div class="time-content"><img style="border-radius: 999%;" src="/static/images/download.png" alt="Sri lanka" height="20" width="20">
 										<!-- Date:&nbsp; 23/05/2021&nbsp; &nbsp;08:18 -->
@@ -2592,12 +2592,24 @@
     ></script> -->
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<script>
-		var day = new Date().getDate();
-		var month = new Date().getMonth();
-		var year = new Date().getFullYear();
-		
-		let d = day + "-" + month + "-" + year
+		// var day = new Date().getDate();
+		// var month = new Date().getMonth();
+		// var year = new Date().getFullYear();
+
+		var date = new Date().toString().split(" ")
+		var newDate = date[0] + " " + date[1] + " " + date[2] + " " + date[3] + " " + date[4]
+
+		let d = newDate
 		document.getElementById("demo").innerHTML = d;
+	</script>
+	<script>
+		var d = new Date()
+		var hours = d.getHours(); // => 9
+		var minutes = d.getMinutes(); // =>  30
+		var seconds = d.getSeconds(); // => 51
+
+		let t = hours + ":" + minutes + ":" + seconds
+		document.getElementById("time").innerHTML = t;
 	</script>
 	<script type="text/javascript">
         ( function ( $ ) {
