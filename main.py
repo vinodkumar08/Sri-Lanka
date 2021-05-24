@@ -64,7 +64,7 @@ def login():
             # session['password'] = password
             session['logged_in'] = True
             flash("Logged in Successfully", "success")
-            return redirect(url_for('admin_news'))
+            return redirect(url_for('admin_clients'))
         else:
             flash("Login Failed. Please try again!!", "danger")
             return redirect(url_for('login'))
