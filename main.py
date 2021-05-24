@@ -20,10 +20,10 @@ from models.ExternalLink import ExternalLink
 from models.News import News
 
 # development
-# app.config.from_object(Development)
+app.config.from_object(Development)
 
 # production
-app.config.from_object(Production)
+# app.config.from_object(Production)
 
 @app.before_first_request
 def create_tables():
@@ -78,18 +78,20 @@ def home():
 @app.route('/admin_news', methods = ['GET', 'POST'])
 @login_required
 def admin_news():
-    if 'logged_in' in session:
-        if request.method == 'POST':
-            title = request.form['title']
-            description = request.form['description']
+    if 'email' not in session:
+        return redirect(url_for("login"))
 
-            news = News(title = title, description = description)
-            db.session.add(news)
-            db.session.commit()
-            flash("News added successfully", "success")
-            return redirect(url_for('admin_news'))
-        
-        news_items = News.query.all()
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+
+        news = News(title = title, description = description)
+        db.session.add(news)
+        db.session.commit()
+        flash("News added successfully", "success")
+        return redirect(url_for('admin_news'))
+    
+    news_items = News.query.all()
 
     return render_template("admin_news.html", news_items = news_items)
 
@@ -100,49 +102,51 @@ def allowed_file(filename):
 @app.route('/admin_images', methods = ['GET', 'POST'])
 @login_required
 def admin_images():
-    if 'logged_in' in session:
+    if 'email' not in session:
+        return redirect(url_for("login"))
 
-        if request.method == 'POST':        
-            image = request.files['file']
-            link = request.form['link']
+    if request.method == 'POST':        
+        image = request.files['file']
+        link = request.form['link']
 
-            # check if the post request has the file part
-            # if 'image' not in image:
-                # flash('No file part','danger')
-            print("image", type(image))
-            # return redirect(request.url)
-            # print(image)
+        # check if the post request has the file part
+        # if 'image' not in image:
+            # flash('No file part','danger')
+        print("image", type(image))
+        # return redirect(request.url)
+        # print(image)
 
-            file = image
+        file = image
 
-            if file.filename == '':
-                # flash('No selected file','danger')
-                print("No file selected")
-                return redirect(request.url)
+        if file.filename == '':
+            # flash('No selected file','danger')
+            print("No file selected")
+            return redirect(request.url)
 
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
 
-                # upload the file to cloudinary
-                upload_data = cloudinary.uploader.upload(file)
+            # upload the file to cloudinary
+            upload_data = cloudinary.uploader.upload(file)
 
 
-            data = ExternalLink(image=upload_data['secure_url'], link=link)
-            db.session.add(data)
-            db.session.commit()
-            flash("External link added successfully", "success")
-            return redirect(url_for('admin_images'))
+        data = ExternalLink(image=upload_data['secure_url'], link=link)
+        db.session.add(data)
+        db.session.commit()
+        flash("External link added successfully", "success")
+        return redirect(url_for('admin_images'))
         
-        images = ExternalLink.query.all()
+    images = ExternalLink.query.all()
         
     return render_template("admin_external_links.html", images = images)
 
 @app.route('/admin_clients', methods = ['GET', 'POST'])
 @login_required
 def admin_clients():
-    if 'logged_in' in session:
+    if 'email' not in session:
+        return redirect(url_for("login"))
 
-        clients = Client.query.all()
+    clients = Client.query.all()
 
     return render_template("clients.html", clients = clients)
 
