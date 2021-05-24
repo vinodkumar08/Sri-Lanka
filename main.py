@@ -189,6 +189,8 @@ def register():
         db.session.add(clients)
         db.session.commit()
 
+        return redirect(url_for('register'))
+
     return render_template("register.html")
 
 @app.route('/consular')
@@ -199,7 +201,7 @@ def consular():
 def tourism():
     return render_template("tourism.html")
 
-@app.route('/contact')
+@app.route('/contact', methods = ['GET', 'POST'])
 def contact():
     if request.method == 'POST':
         title = request.form['title']
@@ -217,6 +219,8 @@ def contact():
         clients = Client(title = title, first_name = first_name, last_name = last_name, marital_status = marital_status, occupation = occupation, address = address, city = city, state = state, zip_code = zip_code, phone_number = phone_number, email = email)
         db.session.add(clients)
         db.session.commit()
+
+        return redirect(url_for('contact'))
         
     return render_template("contact.html")
 
