@@ -19,7 +19,7 @@ from models.Client import Client
 from models.ExternalLink import ExternalLink
 from models.News import News
 
-app.config.from_object(Development)
+app.config.from_object(Production)
 
 @app.before_first_request
 def create_tables():
