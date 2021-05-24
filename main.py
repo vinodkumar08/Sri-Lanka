@@ -30,17 +30,25 @@ def create_tables():
     db.create_all()
 
 # create a login required wrapper for user
-def user_login_required(f): #define a function whose first parameter is f, which is convention for the fact that it wraps a function
+def login_required(f):
     @wraps(f)
-    def wrap(*args,**kwargs):
+    def wrap(*args, **kwargs):
         if 'logged_in' in session:
-            print("Authorized to login")
-            return f(*args, **kwargs)
+            return f(*args,**kwargs)
         else:
-            flash('Unauthorized! Please log in','danger')
-            # print("Unauthorized")
+            flash('Unauthorized! Please log in', 'danger')
             return redirect(url_for('login',next=request.url))
     return wrap
+
+# def user_login_required(f):
+#     @wraps(f)
+#     def decorated_function(*args, **kwargs):
+#         # if g is None:
+#         if 'logged_in' not in session:
+#             flash('Unauthorized. Please login!!', "danger")
+#             return redirect(url_for('login', next=request.url))
+#         return f(*args, **kwargs)
+#     return decorated_function
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -68,7 +76,7 @@ def home():
     return render_template("index.html")
 
 @app.route('/admin_news', methods = ['GET', 'POST'])
-@user_login_required
+@login_required
 def admin_news():
     if 'logged_in' in session:
         if request.method == 'POST':
@@ -90,7 +98,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/admin_images', methods = ['GET', 'POST'])
-@user_login_required
+@login_required
 def admin_images():
     if 'logged_in' in session:
 
@@ -130,7 +138,7 @@ def admin_images():
     return render_template("admin_external_links.html", images = images)
 
 @app.route('/admin_clients', methods = ['GET', 'POST'])
-@user_login_required
+@login_required
 def admin_clients():
     if 'logged_in' in session:
 
