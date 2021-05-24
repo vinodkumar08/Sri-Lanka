@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, g, session
+from flask import Flask, render_template, request, url_for, redirect, session
 from flask.helpers import flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
@@ -33,7 +33,7 @@ def create_tables():
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
-        if 'logged_in' in session:
+        if 'email' in session:
             return f(*args,**kwargs)
         else:
             flash('Unauthorized! Please log in', 'danger')
@@ -231,5 +231,5 @@ def logout():
     flash('You are now logged out','success')
     return redirect(url_for('login'))
 
-if __name__ == '__main__':
-    app.run()
+# if __name__ == '__main__':
+#     app.run()
