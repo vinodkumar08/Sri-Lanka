@@ -7,10 +7,20 @@
                 <li><a href="{{url_for('admin_news')}}">News</a></li>
                 <li><a href="{{url_for('admin_images')}}">External Links</a></li>
                 <li><a href="{{url_for('admin_clients')}}">Clients</a></li>
+                <li><a href="{{url_for('logout')}}">Log Out</a></li>
             </ul>
         </div>
         <div class="right-container">
             <div class="news-form">
+                {% with messages = get_flashed_messages(with_categories = true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="message-{{category}}" role="alert">
+                            <span style="text-align: center; padding: 1rem 0; font-weight: 700;">{{ message }}</span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
                 <h2 class="heading-2" style="padding: 0 1rem">Add News</h2>
     
                 <form action="/admin_news" method="POST">

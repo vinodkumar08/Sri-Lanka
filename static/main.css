@@ -3,6 +3,12 @@
     font-weight: 600;
     padding: 2rem 0;
 }
+
+@media screen and (max-width: 480px) {
+    .header {
+        font-size: 1rem;
+    }
+}
 /* 
 body {
     background: #fff !important;
@@ -176,7 +182,7 @@ body {
     display: flex;
     align-items: center;
     gap: .6rem;
-    padding:.4rem 4rem;
+    padding:.4rem;
 }
 
 .sub-content {
@@ -218,4 +224,24 @@ body {
     box-shadow: 0 4px 8px 0 rgba(5, 5, 5, 0.2);
     border-radius: 8px;
     padding: 1rem;
+}
+
+.message-danger {
+    border: 1px solid red;
+    border-radius: 4px;
+    background: red;
+    color: #fff;
+    padding: .4rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.message-success {
+    border: 1px solid rgb(30, 141, 30);
+    border-radius: 4px;
+    background: rgb(30, 141, 30);
+    width: 300px;
+    margin: 0 auto;
+    color: #fff;
+    padding: .4rem 1rem;
+    margin-bottom: 1rem;
 }

@@ -7,7 +7,17 @@
 
 <div class="sub-content">
     <div class="sub-container flex-2" style="padding: 4.8rem 0;">
+                
         <form action="/login" method="POST">
+            {% with messages = get_flashed_messages(with_categories = true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="message-{{category}}" role="alert">
+                            <span style="text-align: center; padding: 1rem 0; font-weight: 700;">{{ message }}</span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <h2>Admin Login</h2>
             <label for="materialFormRegisterEmailEx">Email</label>
             <input type="email" name="email" placeholder="Enter email" id="materialFormRegisterEmailEx" class="form-control">

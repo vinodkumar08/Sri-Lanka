@@ -19,7 +19,7 @@ from models.Client import Client
 from models.ExternalLink import ExternalLink
 from models.News import News
 
-app.config.from_object(Production)
+app.config.from_object(Development)
 
 @app.before_first_request
 def create_tables():
@@ -33,8 +33,8 @@ def user_login_required(f): #define a function whose first parameter is f, which
             print("Authorized to login")
             return f(*args, **kwargs)
         else:
-            # flash('Unauthorized! Please log in','danger')
-            print("Unauthorized")
+            flash('Unauthorized! Please log in','danger')
+            # print("Unauthorized")
             return redirect(url_for('login',next=request.url))
     return wrap
 
@@ -51,8 +51,10 @@ def login():
             session['email'] = email
             # session['password'] = password
             session['logged_in'] = True
+            flash("Logged in Successfully", "success")
             return redirect(url_for('admin_news'))
         else:
+            flash("Login Failed. Please try again!!", "danger")
             return redirect(url_for('login'))
 
     return render_template("login.html")
@@ -71,6 +73,7 @@ def admin_news():
         news = News(title = title, description = description)
         db.session.add(news)
         db.session.commit()
+        flash("News added successfully", "success")
     
     news_items = News.query.all()
 
@@ -111,8 +114,8 @@ def admin_images():
         data = ExternalLink(image=upload_data['secure_url'], link=link)
         db.session.add(data)
         db.session.commit()
-        # flash("External link added successfully")
-        print("External link added successfully")
+        flash("External link added successfully", "success")
+        # print("External link added successfully")
     
     images = ExternalLink.query.all()
 
@@ -212,6 +215,13 @@ def contact():
         db.session.commit()
         
     return render_template("contact.html")
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('You are now logged out','success')
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run()
