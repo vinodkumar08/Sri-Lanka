@@ -2361,8 +2361,13 @@
 
 							<div class="top_bar_left clearfix">
 								<div class="top-bar">
-									<div class="time-content"><img style="border-radius: 999%;" src="/static/images/download (1).png" alt="Kenya" height="20" width="20">Date:&nbsp; 23/05/2021&nbsp; &nbsp;05:48</div>
-									<div class="time-content"><img style="border-radius: 999%;" src="/static/images/download.png" alt="Sri lanka" height="20" width="20">Date:&nbsp; 23/05/2021&nbsp; &nbsp;08:18</div>
+									<div class="time-content">
+										<img style="border-radius: 999%;" src="/static/images/download (1).png" alt="Kenya" height="20" width="20">
+										Date:&nbsp; <span id="demo"></span>
+									</div>
+									<div class="time-content"><img style="border-radius: 999%;" src="/static/images/download.png" alt="Sri lanka" height="20" width="20">
+										<!-- Date:&nbsp; 23/05/2021&nbsp; &nbsp;08:18 -->
+									</div>
 								</div>
 								<!-- Logo -->
 								<div class="logo flex-2" style="margin-bottom:1rem;">
@@ -2586,6 +2591,14 @@
       crossorigin="anonymous"
     ></script> -->
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script>
+		var day = new Date().getDate();
+		var month = new Date().getMonth();
+		var year = new Date().getFullYear();
+		
+		let d = day + "-" + month + "-" + year
+		document.getElementById("demo").innerHTML = d;
+	</script>
 	<script type="text/javascript">
         ( function ( $ ) {
             "use strict";

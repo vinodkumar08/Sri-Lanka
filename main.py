@@ -19,7 +19,7 @@ from models.Client import Client
 from models.ExternalLink import ExternalLink
 from models.News import News
 
-app.config.from_object(Production)
+app.config.from_object(Development)
 
 @app.before_first_request
 def create_tables():
@@ -66,16 +66,18 @@ def home():
 @app.route('/admin_news', methods = ['GET', 'POST'])
 @user_login_required
 def admin_news():
-    if request.method == 'POST':
-        title = request.form['title']
-        description = request.form['description']
+    if 'logged_in' in session:
+        if request.method == 'POST':
+            title = request.form['title']
+            description = request.form['description']
 
-        news = News(title = title, description = description)
-        db.session.add(news)
-        db.session.commit()
-        flash("News added successfully", "success")
-    
-    news_items = News.query.all()
+            news = News(title = title, description = description)
+            db.session.add(news)
+            db.session.commit()
+            flash("News added successfully", "success")
+            return redirect(url_for('admin_news'))
+        
+        news_items = News.query.all()
 
     return render_template("admin_news.html", news_items = news_items)
 
@@ -86,63 +88,49 @@ def allowed_file(filename):
 @app.route('/admin_images', methods = ['GET', 'POST'])
 @user_login_required
 def admin_images():
-    if request.method == 'POST':        
-        image = request.files['file']
-        link = request.form['link']
+    if 'logged_in' in session:
 
-        # check if the post request has the file part
-        # if 'image' not in image:
-            # flash('No file part','danger')
-        print("image", type(image))
-        # return redirect(request.url)
-        # print(image)
+        if request.method == 'POST':        
+            image = request.files['file']
+            link = request.form['link']
 
-        file = image
+            # check if the post request has the file part
+            # if 'image' not in image:
+                # flash('No file part','danger')
+            print("image", type(image))
+            # return redirect(request.url)
+            # print(image)
 
-        if file.filename == '':
-            # flash('No selected file','danger')
-            print("No file selected")
-            return redirect(request.url)
+            file = image
 
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+            if file.filename == '':
+                # flash('No selected file','danger')
+                print("No file selected")
+                return redirect(request.url)
 
-            # upload the file to cloudinary
-            upload_data = cloudinary.uploader.upload(file)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+
+                # upload the file to cloudinary
+                upload_data = cloudinary.uploader.upload(file)
 
 
-        data = ExternalLink(image=upload_data['secure_url'], link=link)
-        db.session.add(data)
-        db.session.commit()
-        flash("External link added successfully", "success")
-        # print("External link added successfully")
-    
-    images = ExternalLink.query.all()
-
+            data = ExternalLink(image=upload_data['secure_url'], link=link)
+            db.session.add(data)
+            db.session.commit()
+            flash("External link added successfully", "success")
+            return redirect(url_for('admin_images'))
+        
+        images = ExternalLink.query.all()
+        
     return render_template("admin_external_links.html", images = images)
 
 @app.route('/admin_clients', methods = ['GET', 'POST'])
 @user_login_required
 def admin_clients():
-    if request.method == 'POST':
-        title = request.form['title']
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        marital_status = request.form['marital_status']
-        occupation = request.form['occupation']
-        address = request.form['address']
-        city = request.form['city']
-        state = request.form['state']
-        zip_code = request.form['zip_code']
-        phone_number = request.form['phone_number']
-        email = request.form['email']
+    if 'logged_in' in session:
 
-        clients = Client(title = title, first_name = first_name, last_name = last_name, marital_status = marital_status, occupation = occupation, address = address, city = city, state = state, zip_code = zip_code, phone_number = phone_number, email = email)
-        print(clients)
-        db.session.add(clients)
-        db.session.commit()
-
-    clients = Client.query.all()
+        clients = Client.query.all()
 
     return render_template("clients.html", clients = clients)
 
