@@ -1,87 +1,149 @@
 {% extends "base.html" %}
 
 {% block content %}
+    
+     <!-- main content -->
+        <!-- #Content -->
+        <div id="Content">
+            <div class="content_wrapper clearfix">
 
-        <!-- main content -->
-        <!-- form -->
+                <!-- .sections_group -->
+                <div class="sections_group">
 
-        <div class="main-content">
-            <form action="/contact" class="register-section" method="POST">
-                <div class="personal-form">
-                    <h4 class="form-title">Personal Information</h4>
-                    <div class="form-group">
-                        <label for="title-select">Title:</label>
+                    <div class="entry-content" itemprop="mainContentOfPage">
 
-                        <select class="input" name="title" id="title-select">
-                            <option value="Mr">Mr</option>
-                            <option value="Mrs">Mrs</option>
-                            <option value="Ms">Ms</option>
-                            <option value="Dr">Dr</option>
-                            <option value="Rev">Rev</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>First Name:</label>
-                        <input class="input" name="first_name" style="width: 400px;" type="text" placeholder="Your First Name">
-                    </div>
-                    <div class="form-group">
-                        <label>Last Name:</label>
-                        <input class="input" name="last_name" style="width: 400px;" type="text" placeholder="Your Last Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="marital-select">Marital Status:</label>
+                        <div class="section mcb-section" style="padding-top:0px; padding-bottom:0px;">
+                            <div class="section_wrapper mcb-section-inner">
+                                <div class="wrap mcb-wrap one  valign-top clearfix" style="background-color:#FFFFFF">
+                                    <div class="mcb-wrap-inner">
+                                        <div class="column mcb-column one column_photo_box ">
+                                            <div class="photo_box  without-desc">
+                                                <div class="image_frame">
+                                                    <div class="image_wrapper">
+                                                        <!-- <div class="mask"></div> -->
+                                                        <img class="scale" src="/static/images/IMG_20210430_164356.jpg.png.png"
+                                                            alt="consular_logo_1" width="700" height="200" />
 
-                        <select class="input" name="marital_status" id="marital-select">
-                            <option value="Not Applicable">Not Applicable</option>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Occupation:</label>
-                        <input class="input" name="occupation" style="width: 400px;" type="text" placeholder="Your Occupation">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wrap mcb-wrap one  valign-top clearfix">
+                                    <div class="mcb-wrap-inner">
+                                        <div class="column mcb-column one-second column_visual ">
+                                            <h3 style="text-align: center;">Office Hours</h3>
+                                            <p align="center"><strong>Office Hours : Mon -Fri (Except for public holidays) <br> <br> 
+                                                <span style="font-size: 24px;">8.30am - 4.30pm</span></strong></p>
+                                            <p style="color: red; margin-top: 2rem;"> *Please note that we are closed on Saturday, Sunday and some declared holidays by the High Commission of Sri Lanka in Kenya.</p>
+                                        </div>
+                                        <div class="column mcb-column one-second column_contact_box ">
+                                            <div class="get_in_touch">
+                                                <h3>Further information can be obtained from:</h3>
+                                                <div class="get_in_touch_wrapper">
+                                                    <ul>
+                                                        <li class="address"><span class="icon"><i
+                                                                    class="icon-location"></i></span><span
+                                                                class="address_wrapper">
+                                                                <h3>Sri Lanka High Commission</h3>
+                                                                <p>2nd Floor, West 1 - <br> Parklands Road, <br> Nairobi, Kenya <br />
+                                                            </span>
+                                                        </li>
+                                                        <li class="phone phone-1">
+                                                            <span class="icon">
+                                                                <i class="icon-phone"></i></span>
+                                                            <p><a href="tel:(+254) 734387267">Tel: +254734387267</a></p>
+                                                        </li>
+                                                    
+                                                        <li class="mail">
+                                                            <span class="icon"><i class="icon-mail"></i></span>
+                                                            <p><a
+                                                                    href="mailto:slhc.nairobi@mfa.gov.lk">Email: slhc.nairobi@mfa.gov.lk</a>
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="contact-form">
-                    <h4 class="form-title">Contact Details</h4>
-                    <div class="form-group">
-                        <label>Address:</label>
-                        <input class="input" name="address" style="width: 400px;" type="text" placeholder="Your Address">
-                    </div>
-
-                    <div class="form-group">
-                        <label>City:</label>
-                        <input class="input" name="city" style="width: 400px;" type="text" placeholder="Your City">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="state-select">State:</label>
-
-                        <select class="input" name="state" id="state-select">
-                            <option value="Not Applicable">Not Applicable</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Zip</label>
-                        <input class="input" name="zip_code" style="width: 400px;" type="text" placeholder="Your Zip">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input class="input" name="phone_number" style="width: 400px;" type="text" placeholder="Your Number">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input class="input" name="email" style="width: 400px;" type="text" placeholder="Your Email Address">
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Submit" />
+                <!-- .four-columns - sidebar -->
+                <div class="sidebar sidebar-1 four columns">
+                    <div class="widget-area clearfix ">
+                        <aside class="custom">
+                            <p>
+                                <a class="wf_file" target="_blank" href="/static/files/Sri_Lanka_at_a_glance.pdf">
+                                    <img src="/static/images/sl_glance_new2.png" alt="sl glance new2" width="220"
+                                        height="40" />
+                                </a>
+                            </p>
+                            <p>
+                                <a class="wf_file" target="_blank" href="/static/files/hello-again-text-f2.pdf">
+                                    <img src="/static/images/helloagainposter.jpg" alt="helloagainposter" width="220"
+                                        height="40" />
+                                </a>
+                            </p>
+                            <p>
+                                <a target="_blank" href="https://www.contactsrilanka.mfa.gov.lk/">
+                                    <img src="/static/images/button_Contact_srilanka.jpg" alt="button Contact srilanka"
+                                        width="220" height="40" />
+                                </a>
+                            </p>
+                            <p>
+                                <a target="_blank" href="/static/files/Information_Related_to_COVID-19_-_update29.pdf">
+                                    <img src="/static/images/Covid-Banner-19.jpg" alt="Covid Banner 19" width="220"
+                                        height="40" />
+                                </a>
+                            </p>
+                            <p>
+                                <a target="_blank" href="https://slembassyusa.org/tracking/">
+                                    <img src="/static/images/passport-status.png" alt="" width="220" height="40" />
+                                </a>
+                            </p>
+                            <p>
+                                <a target="_blank" href="https://www.pmdnews.lk/">
+                                    <img src="/static/images/presidential_secretariat_new.jpg"
+                                        alt="presidential secretariat new" width="222" height="43" />
+                                </a>
+                            </p>
+                            <p>
+                                <a target="_blank" href="https://www.pmoffice.gov.lk/">
+                                    <img src="/static/images/prime_ministerst_new.jpg" alt="prime ministerst new"
+                                        width="220" height="40" />
+                                </a>
+                            </p>
+                            <p>
+                                <a target="_blank" href="https://mfa.gov.lk/">
+                                    <img src="/static/images/MFA_tab_n.jpg" alt="MFA tab n" width="220" height="40" />
+                                </a>
+                            </p>
+                            <p>
+                                <a target="_blank" href="https://www.gov.lk/index.php">
+                                    <img src="/static/images/govwedlogo.jpg" alt="govwedlogo" width="220" height="40" />
+                                </a>
+                            </p>
+                            <p>
+                                <a class="wf_file" target="_blank" href="/static/files/SLNY-2021_Banner_Banner-V1.pdf">
+                                    <img src="/static/images/aurudu_logo_new_black.png" alt="aurudu logo new black" />
+                                </a>
+                            </p>
                     </div>
                 </div>
-            </form>
+            </div>
+
+
+
+
+
         </div>
+    </div>
+    </div>
+    </div>
 
-        {% endblock %}
+{% endblock %}
